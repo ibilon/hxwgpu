@@ -1,0 +1,32 @@
+name: Main
+
+on: [push]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Setup rust
+      uses: hecrj/setup-rust-action@v1
+      with:
+        rust-version: stable
+
+    - name: Setup haxe
+      uses: haxeui/haxeui-core/.github/actions/haxe@master
+      with:
+        haxe-version: 4.1.1
+
+    - name: Setup haxe dependencies
+      run: haxelib install hxcpp
+
+    - name: Setup GLFW
+      run: sudo apt install libglfw3-dev --yes
+
+    - name: Build
+      run: haxe sample/build.hxml

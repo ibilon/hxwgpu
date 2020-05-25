@@ -1,5 +1,7 @@
 # (WIP) hxwgpu
 
+![Build Status](https://github.com/ibilon/hxwgpu/workflows/Main/badge.svg)
+
 hxwgpu is a work in progress Haxe/hxcpp wrapper around wgpu-native, allowing the use of the WebGPU API on desktop.
 
 Currently only tested on linux with X11.
