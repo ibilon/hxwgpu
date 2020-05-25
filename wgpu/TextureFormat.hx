@@ -1,0 +1,42 @@
+package wgpu;
+
+enum abstract TextureFormat(UInt) {
+	var R8Unorm = 0;
+	var R8Snorm = 1;
+	var R8Uint = 2;
+	var R8Sint = 3;
+	var R16Uint = 4;
+	var R16Sint = 5;
+	var R16Float = 6;
+	var Rg8Unorm = 7;
+	var Rg8Snorm = 8;
+	var Rg8Uint = 9;
+	var Rg8Sint = 10;
+	var R32Uint = 11;
+	var R32Sint = 12;
+	var R32Float = 13;
+	var Rg16Uint = 14;
+	var Rg16Sint = 15;
+	var Rg16Float = 16;
+	var Rgba8Unorm = 17;
+	var Rgba8UnormSrgb = 18;
+	var Rgba8Snorm = 19;
+	var Rgba8Uint = 20;
+	var Rgba8Sint = 21;
+	var Bgra8Unorm = 22;
+	var Bgra8UnormSrgb = 23;
+	var Rgb10a2Unorm = 24;
+	var Rg11b10Float = 25;
+	var Rg32Uint = 26;
+	var Rg32Sint = 27;
+	var Rg32Float = 28;
+	var Rgba16Uint = 29;
+	var Rgba16Sint = 30;
+	var Rgba16Float = 31;
+	var Rgba32Uint = 32;
+	var Rgba32Sint = 33;
+	var Rgba32Float = 34;
+	var Depth32Float = 35;
+	var Depth24Plus = 36;
+	var Depth24PlusStencil8 = 37;
+}

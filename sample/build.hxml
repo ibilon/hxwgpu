@@ -1,0 +1,9 @@
+extraParams.hxml
+--class-path sample
+--main Main
+--cpp sample/build
+--debug
+-D glfw
+
+--cmd glslangValidator -V -S frag -o sample/res/triangle.frag.spv sample/res/triangle.frag.glsl
+--cmd glslangValidator -V -S vert -o sample/res/triangle.vert.spv sample/res/triangle.vert.glsl

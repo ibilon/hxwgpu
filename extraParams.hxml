@@ -1,0 +1,1 @@
+--macro wgpu.NativeLibrary.build()

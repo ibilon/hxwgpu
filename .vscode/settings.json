@@ -1,0 +1,13 @@
+{
+	"[haxe]": {
+		"editor.formatOnSave": true
+	},
+	"haxe.configurations": [
+		{
+			"label": "Sample",
+			"args": [
+				"sample/build.hxml"
+			]
+		}
+	]
+}

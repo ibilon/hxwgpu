@@ -1,0 +1,10 @@
+{
+	"name": "wgpu",
+	"url" : "https://github.com/ibilon/hxwgpu/",
+	"license": "MIT",
+	"tags": ["wgpu", "webgpu", "gpu"],
+	"description": "",
+	"version": "0.0.1",
+	"releasenote": "Initial proof of concept",
+	"contributors": ["_ibilon"]
+}
