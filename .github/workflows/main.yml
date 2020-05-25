@@ -23,10 +23,25 @@ jobs:
         haxe-version: 4.1.1
 
     - name: Setup haxe dependencies
-      run: haxelib install hxcpp
+      run: |
+        haxelib install dox
+        haxelib install hxcpp
 
     - name: Setup GLFW
       run: sudo apt install libglfw3-dev --yes
 
     - name: Build
       run: haxe sample/build.hxml
+
+    - name: Deploy documentation
+      run: |
+        haxe dox.hxml
+        cd documentation/out
+        git init
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+        git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/ibilon/hxwgpu
+        git checkout -b gh-pages
+        git add -A .
+        git commit -m "Deploying documentation"
+        git push -u origin gh-pages --force
