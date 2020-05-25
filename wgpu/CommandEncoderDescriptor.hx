@@ -6,5 +6,5 @@ package wgpu;
 @:structInit
 class CommandEncoderDescriptor {
 	/** An optional label to apply to the command encoder. This can be useful for debugging and performance analysis. **/
-	@:optional public var label:String;
+	@:optional public var label:Null<String>;
 }

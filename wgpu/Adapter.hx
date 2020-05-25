@@ -80,6 +80,6 @@ class Adapter {
 			return device;
 		');
 
-		return null;
+		throw "unreacheable";
 	}
 }

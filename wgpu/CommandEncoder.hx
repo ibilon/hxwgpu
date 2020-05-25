@@ -79,7 +79,7 @@ class CommandEncoder {
 			return renderPass;
 		');
 
-		return null;
+		throw "unreacheable";
 	}
 
 	/**
@@ -92,6 +92,6 @@ class CommandEncoder {
 			return commandBuffer;
 		');
 
-		return null;
+		throw "unreacheable";
 	}
 }

@@ -96,7 +96,6 @@ function main() {
 				writeMask: All,
 			},
 		],
-		depthStencilState: null,
 		vertexState: {
 			indexFormat: UInt16,
 			vertexBuffers: [

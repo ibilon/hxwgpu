@@ -34,7 +34,7 @@ class Surface {
 			return surface;
 		');
 
-		return null;
+		throw "unreacheable";
 	}
 	#end
 }

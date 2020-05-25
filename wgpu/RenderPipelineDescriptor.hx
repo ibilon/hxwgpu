@@ -12,10 +12,10 @@ class RenderPipelineDescriptor {
 	public var vertexStage:ProgrammableStageDescriptor;
 
 	/** The compiled fragment stage and its entry point, if any. **/
-	@:optional public var fragmentStage:ProgrammableStageDescriptor;
+	@:optional public var fragmentStage:Null<ProgrammableStageDescriptor>;
 
 	/** The compiled fragment stage and its entry point, if any. **/
-	@:optional public var rasterizationState:RasterizationStateDescriptor;
+	@:optional public var rasterizationState:Null<RasterizationStateDescriptor>;
 
 	/** The primitive topology used to interpret vertices. **/
 	public var primitiveTopology:PrimitiveTopology;
@@ -24,7 +24,7 @@ class RenderPipelineDescriptor {
 	public var colorStates:Array<ColorStateDescriptor>;
 
 	/** The effect of draw calls on the depth and stencil aspects of the output target, if any. **/
-	@:optional public var depthStencilState:DepthStencilStateDescriptor;
+	@:optional public var depthStencilState:Null<DepthStencilStateDescriptor>;
 
 	/** The vertex input state for this pipeline. **/
 	public var vertexState:VertexStateDescriptor;

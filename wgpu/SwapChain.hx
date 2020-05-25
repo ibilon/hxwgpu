@@ -21,7 +21,7 @@ class SwapChain {
 			return swapChainOutput;
 		');
 
-		return null;
+		throw "unreacheable";
 	}
 
 	/**

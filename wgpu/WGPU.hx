@@ -14,6 +14,7 @@ class WGPU {
 				->setFixed(2, HX_("patch", c8, 06, 57, bd), version & 0xFF)
 			);
 		');
-		return null;
+
+		throw "unreacheable";
 	}
 }

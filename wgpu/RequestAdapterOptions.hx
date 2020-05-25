@@ -9,5 +9,5 @@ class RequestAdapterOptions {
 	public var powerPreference:PowerPreference;
 
 	/** Surface that is required to be presentable with the requested adapter, if any. **/
-	@:optional public var compatibleSurface:Surface;
+	@:optional public var compatibleSurface:Null<Surface>;
 }

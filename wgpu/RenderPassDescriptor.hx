@@ -9,5 +9,5 @@ class RenderPassDescriptor {
 	public var colorAttachments:Array<RenderPassColorAttachmentDescriptor>;
 
 	/** The depth and stencil attachment of the render pass, if any. **/
-	@:optional public var depthStencilAttachment:RenderPassDepthStencilAttachmentDescriptor;
+	@:optional public var depthStencilAttachment:Null<RenderPassDepthStencilAttachmentDescriptor>;
 }
