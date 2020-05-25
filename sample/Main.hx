@@ -2,7 +2,7 @@ import GLFW.*;
 import wgpu.*;
 
 class Main {
-	function main() {
+	static function main() {
 		if (!glfwInit()) {
 			trace("Cannot initialize glfw");
 			Sys.exit(1);

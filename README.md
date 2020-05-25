@@ -37,8 +37,12 @@ The library follows the API from [wgpu-rs](https://github.com/gfx-rs/wgpu-rs/) w
 * `Surface::create` is replaced with `Surface.fromGLFW`
 
 A small example is available in `sample/`, it requires the glfw3 library to be installed.
-To compile it run `haxe sample/build.hxml`, this requires glslangValidator to be available in the path in order to compile the shaders.
-To run it run `./build/Main-debug` from inside the `sample/` directory.
+
+* Compile it with `haxe sample/build.hxml`
+* Compile the shaders with
+  * `glslangValidator -V -S frag -o sample/res/triangle.frag.spv sample/res/triangle.frag.glsl`
+  * `glslangValidator -V -S vert -o sample/res/triangle.vert.spv sample/res/triangle.vert.glsl`
+* Run it with `sample/build/Main-debug`
 
 ## License
 
