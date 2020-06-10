@@ -1,7 +1,0 @@
---macro nullSafety("wgpu", Strict)
-extraParams.hxml
---class-path sample
---main Main
---cpp sample/build
---debug
--D glfw

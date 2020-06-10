@@ -27,11 +27,13 @@ jobs:
         haxelib install dox
         haxelib install hxcpp
 
-    - name: Setup GLFW
-      run: sudo apt install libglfw3-dev --yes
-
-    - name: Build
-      run: haxe sample/build.hxml
+    - name: Test samples
+      run: |
+        git clone https://github.com/ibilon/hxwgpu-samples.git --recursive
+        cd hxwgpu-samples/libs/hxwgpu
+        git pull
+        cd ../..
+        haxe build_all.hxml
 
     - name: Deploy documentation
       run: |
