@@ -17,6 +17,6 @@ class SwapChainOutput {
 			return textureView;
 		');
 
-		throw "unreacheable";
+		throw "unreachable";
 	}
 }

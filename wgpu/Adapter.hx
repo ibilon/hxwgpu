@@ -5,15 +5,7 @@ package wgpu;
 
 	An `Adapter` can be used to open a connection to the corresponding device on the host system, yielding a `Device` object.
 **/
-@:buildXml('
-<target id="haxe">
-	<flag value="-L../../build/" />
-	<lib name="-lwgpu_native" />
-	<lib name="-lm" if="linux" />
-	<lib name="-lpthread" if="linux" />
-	<lib name="-ldl" if="linux" />
-</target>
-')
+@:build(wgpu.AdapterBuilder.build())
 @:cppFileCode('
 	#ifndef INCLUDED_wgpu_Extensions
 	#include <wgpu/Extensions.h>
@@ -80,6 +72,6 @@ class Adapter {
 			return device;
 		');
 
-		throw "unreacheable";
+		throw "unreachable";
 	}
 }

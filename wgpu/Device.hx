@@ -77,7 +77,7 @@ class Device {
 			return buffer;
 		');
 
-		throw "unreacheable";
+		throw "unreachable";
 	}
 
 	// TODO UInt32 version
@@ -96,7 +96,7 @@ class Device {
 			return buffer;
 		');
 
-		throw "unreacheable";
+		throw "unreachable";
 	}
 
 	public function createCommandEncoder(commandEncoderDescriptor:CommandEncoderDescriptor):CommandEncoder {
@@ -110,7 +110,7 @@ class Device {
 			return commandEncoder;
 		');
 
-		throw "unreacheable";
+		throw "unreachable";
 	}
 
 	public function createPipelineLayout(pipelineLayoutDescriptor:PipelineLayoutDescriptor):PipelineLayout {
@@ -133,7 +133,7 @@ class Device {
 			return pipelineLayout;
 		');
 
-		throw "unreacheable";
+		throw "unreachable";
 	}
 
 	public function createRenderPipeline(renderPipelineDescriptor:RenderPipelineDescriptor):RenderPipeline {
@@ -259,7 +259,7 @@ class Device {
 			return renderPipeline;
 		');
 
-		throw "unreacheable";
+		throw "unreachable";
 	}
 
 	public function createShaderModule(data:Array<UInt>):ShaderModule {
@@ -284,7 +284,7 @@ class Device {
 			return shader_module;
 		');
 
-		throw "unreacheable";
+		throw "unreachable";
 	}
 
 	public function createShaderModuleFromFile(path:String):ShaderModule {
@@ -313,7 +313,7 @@ class Device {
 			return swapChain;
 		');
 
-		throw "unreacheable";
+		throw "unreachable";
 	}
 
 	public function getDefaultQueue():Queue {
@@ -323,6 +323,6 @@ class Device {
 			return queue;
 		');
 
-		throw "unreacheable";
+		throw "unreachable";
 	}
 }

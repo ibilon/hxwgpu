@@ -15,6 +15,6 @@ class WGPU {
 			);
 		');
 
-		throw "unreacheable";
+		throw "unreachable";
 	}
 }

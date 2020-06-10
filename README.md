@@ -4,7 +4,7 @@
 
 API Documentation: <https://ibilon.github.io/hxwgpu/>
 
-hxwgpu is a work in progress Haxe/hxcpp wrapper around wgpu-native, allowing the use of the WebGPU API on desktop.
+hxwgpu is a work in progress haxe/hxcpp wrapper around wgpu-native, allowing the use of the WebGPU API on desktop.
 
 Currently only tested on linux with X11.
 
@@ -36,7 +36,7 @@ The library follows the API from [wgpu-rs](https://github.com/gfx-rs/wgpu-rs/) w
 * `Adapter::request` is replaced with `new Adapter`
 * `AdapterInfo` is not available
 * `device.createBufferWithData` is replaced with `device.createBufferWithFloat32Data` and `device.createBufferWithUInt16Data`
-* `Surface::create` is replaced with `Surface.fromGLFW`
+* `Surface::create` is replaced with `Surface.fromGLFW` supporting the [hxglfw](https://github.com/ibilon/hxglfw) library
 
 A small example is available in `sample/`, it requires the glfw3 library to be installed.
 

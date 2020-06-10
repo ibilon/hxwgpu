@@ -13,7 +13,15 @@
 				"$haxe",
 				"$haxe-error",
 				"$haxe-trace"
-			],
+			]
+		},
+		{
+			"label": "Run sample",
+			"type": "process",
+			"command": "./sample/build/Main-debug",
+			"args": [],
+			"problemMatcher": [],
+			"dependsOn": "Build sample",
 			"group": {
 				"kind": "build",
 				"isDefault": true
