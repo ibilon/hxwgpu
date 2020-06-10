@@ -13,6 +13,11 @@ import sys.io.Process;
 class NativeLibrary {
 	#if macro
 	macro static function build():Expr {
+		// Don't build library if no compilation happen
+		if (Context.defined("no-compilation")) {
+			return macro null;
+		}
+
 		switch (Context.getType("wgpu.NativeLibrary")) {
 			case TInst(_.get() => t, _):
 				final cwd = Sys.getCwd();

@@ -17,6 +17,9 @@ jobs:
       with:
         rust-version: stable
 
+    - name: Setup GLFW dependencies
+      run: sudo apt install xorg-dev --yes
+
     - name: Setup haxe
       uses: haxeui/haxeui-core/.github/actions/haxe@master
       with:
@@ -31,7 +34,7 @@ jobs:
       run: |
         git clone https://github.com/ibilon/hxwgpu-samples.git --recursive
         cd hxwgpu-samples/libs/hxwgpu
-        git pull
+        git pull https://github.com/ibilon/hxwgpu.git
         cd ../..
         haxe build_all.hxml
 
