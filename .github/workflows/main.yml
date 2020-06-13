@@ -40,7 +40,8 @@ jobs:
 
     - name: Deploy documentation
       run: |
-        haxe dox.hxml
+        haxe cppia_host.hxml -xml documentation/hxwgpu.xml -D no-compilation
+        haxelib run dox -o documentation/out/ -i documentation/cpp.xml -in wgpu --title "hxwgpu API reference" --toplevel-package wgpu --keep-field-order -D version 0.0.1 -D source-path https://github.com/ibilon/hxwgpu/blob/master/ -D website https://github.com/ibilon/hxwgpu -D description "hxwgpu is a work in progress Haxe/hxcpp wrapper around wgpu-native, allowing the use of the WebGPU API on desktop"
         cd documentation/out
         git init
         git config --global user.name "${{ github.actor }}"

@@ -2,11 +2,11 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Build documentation",
+			"label": "Build host",
 			"type": "process",
 			"command": "haxe",
 			"args": [
-				"dox.hxml"
+				"cppia_host.hxml"
 			],
 			"problemMatcher": [
 				"$haxe-absolute",
@@ -14,6 +14,58 @@
 				"$haxe-error",
 				"$haxe-trace"
 			]
+		},
+		{
+			"label": "Pretask for Generate documentation",
+			"type": "process",
+			"command": "haxe",
+			"args": [
+				"cppia_host.hxml",
+				"-xml",
+				"documentation/hxwgpu.xml",
+				"-D",
+				"no-compilation"
+			],
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			]
+		},
+		{
+			"label": "Generate documentation",
+			"type": "process",
+			"command": "haxelib",
+			"args": [
+				"run",
+				"dox",
+				"-o",
+				"documentation/out/",
+				"-i",
+				"documentation/hxwgpu.xml",
+				"-in",
+				"wgpu",
+				"--title",
+				"hxwgpu API reference",
+				"--toplevel-package",
+				"wgpu",
+				"--keep-field-order",
+				"-D",
+				"version",
+				"0.0.1",
+				"-D",
+				"source-path",
+				"https://github.com/ibilon/hxwgpu/blob/master/",
+				"-D",
+				"website",
+				"https://github.com/ibilon/hxwgpu",
+				"-D",
+				"description",
+				"hxwgpu is a work in progress Haxe/hxcpp wrapper around wgpu-native, allowing the use of the WebGPU API on desktop"
+			],
+			"problemMatcher": [],
+			"dependsOn": "Pretask for Generate documentation"
 		}
 	]
 }

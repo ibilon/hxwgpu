@@ -18,15 +18,18 @@ class AdapterBuilder {
 		}
 
 		Context.getLocalClass().get().meta.add(":buildXml", [
-			macro '
-		<target id="haxe">
-			<flag value="-L$path" />
-			<lib name="-lwgpu_native" />
-			<lib name="-lm" if="linux" />
-			<lib name="-lpthread" if="linux" />
-			<lib name="-ldl" if="linux" />
-		</target>
-		'
+			{
+				expr: EConst(CString('
+					<target id="haxe">
+						<flag value="-L$path" />
+						<lib name="-lwgpu_native" />
+						<lib name="-lm" if="linux" />
+						<lib name="-lpthread" if="linux" />
+						<lib name="-ldl" if="linux" />
+					</target>
+				')),
+				pos: Context.currentPos()
+			}
 		], Context.currentPos());
 
 		return Context.getBuildFields();

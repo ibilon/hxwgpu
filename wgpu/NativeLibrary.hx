@@ -73,6 +73,9 @@ class NativeLibrary {
 				File.copy(Path.join([path, "wgpu-native", "target", "debug", "libwgpu_native.a"]), Path.join([path, "build", "libwgpu_native.a"]));
 				File.saveContent(Path.join([path, "build", "hash.txt"]), version);
 
+				// Clean up build
+				Sys.command("rm", ["-r", Path.join([path, "wgpu-native", "target"])]); // TODO win, macos
+
 			default:
 				throw "can't find the wgpu.NativeLibrary type";
 		}

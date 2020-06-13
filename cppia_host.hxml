@@ -1,0 +1,8 @@
+extraParams.hxml
+--macro include("wgpu")
+--main wgpu.CppiaHost
+--dce no
+--debug
+--cpp build/cppia_host
+-D scriptable
+-D dll_export=build/export_classes.info

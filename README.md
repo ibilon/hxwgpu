@@ -6,15 +6,14 @@ API Documentation: <https://ibilon.github.io/hxwgpu/>
 
 hxwgpu is a work in progress haxe/hxcpp wrapper around wgpu-native, allowing the use of the WebGPU API on desktop.
 
+The library is null safe and compatible cppia, see `cppia_host.hxml` and the samples on how to use cppia.
+
 Currently only tested on linux with X11.
 
 Plans:
 
 * Complete the API
-* Build a cppia host
-* Make the library null safe
 * Test support with GLFW on windows and mac
-* Add support for the js target using the web browser's WebGPU API
 
 ## Building
 
