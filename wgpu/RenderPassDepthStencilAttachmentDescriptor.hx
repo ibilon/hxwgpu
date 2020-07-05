@@ -8,5 +8,5 @@ class RenderPassDepthStencilAttachmentDescriptor {
 	public var clearDepth:Float;
 	public var stencilLoadOp:LoadOp;
 	public var stencilStoreOp:StoreOp;
-	public var clearStencil:UInt;
+	public var clearStencil:Int;
 }

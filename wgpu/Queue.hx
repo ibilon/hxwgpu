@@ -1,5 +1,7 @@
 package wgpu;
 
+import haxe.ds.ReadOnlyArray;
+
 /**
 	A handle to a command queue on a device.
 
@@ -11,7 +13,7 @@ package wgpu;
 @:headerInclude('./wgpu.h')
 class Queue {
 	/** Submits a series of finished command buffers for execution. **/
-	public function submit(commandBuffers:Array<CommandBuffer>):Void {
+	public function submit(commandBuffers:ReadOnlyArray<CommandBuffer>):Void {
 		untyped __cpp__('
 			WGPUCommandBufferId *command_buffers = (WGPUCommandBufferId*)malloc(sizeof(*command_buffers) * commandBuffers->length);
 

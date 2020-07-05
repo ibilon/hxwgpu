@@ -1,6 +1,6 @@
 package wgpu;
 
-enum abstract TextureFormat(UInt) {
+enum abstract TextureFormat(Int) {
 	var R8Unorm = 0;
 	var R8Snorm = 1;
 	var R8Uint = 2;

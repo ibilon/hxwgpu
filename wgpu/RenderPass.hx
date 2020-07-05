@@ -15,7 +15,7 @@ class RenderPass {
 
 		The active vertex buffers can be set with `RenderPass.setVertexBuffers`.
 	**/
-	public function draw(verticesStart:UInt, verticesEnd:UInt, instancesStart:UInt, instancesEnd:UInt):Void {
+	public function draw(verticesStart:Int, verticesEnd:Int, instancesStart:Int, instancesEnd:Int):Void {
 		untyped __cpp__('
 			wgpu_render_pass_draw(native, verticesEnd - verticesStart, instancesEnd - instancesStart, verticesStart, instancesStart);
 		');
@@ -26,7 +26,7 @@ class RenderPass {
 
 		The active index buffer can be set with `RenderPass.setIndexBuffer`, while the active vertex buffers can be set with `RenderPass.setVertexBuffers`.
 	**/
-	public function drawIndexed(indicesStart:UInt, indicesEnd:UInt, baseVertex:Int, instancesStart:UInt, instancesEnd:UInt):Void {
+	public function drawIndexed(indicesStart:Int, indicesEnd:Int, baseVertex:Int, instancesStart:Int, instancesEnd:Int):Void {
 		untyped __cpp__('
 			wgpu_render_pass_draw_indexed(native, indicesEnd - indicesStart, instancesEnd - indicesStart, indicesStart, baseVertex, instancesStart);
 		');
@@ -45,7 +45,7 @@ class RenderPass {
 
 		If `size` == 0, the remaining part of the buffer is considered.
 	**/
-	public function setIndexBuffer(buffer:Buffer, offset:UInt, size:UInt):Void {
+	public function setIndexBuffer(buffer:Buffer, offset:Int, size:Int):Void {
 		untyped __cpp__('
 			wgpu_render_pass_set_index_buffer(native, buffer->native, offset, size);
 		');
@@ -71,7 +71,7 @@ class RenderPass {
 
 		If `size` == 0, the remaining part of the buffer is considered.
 	**/
-	public function setVertexBuffer(slot:UInt, buffer:Buffer, offset:UInt, size:UInt):Void {
+	public function setVertexBuffer(slot:Int, buffer:Buffer, offset:Int, size:Int):Void {
 		untyped __cpp__('
 			wgpu_render_pass_set_vertex_buffer(native, slot, buffer->native, offset, size);
 		');

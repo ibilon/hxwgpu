@@ -1,6 +1,7 @@
 package wgpu;
 
 // TODO missing functions: many
+import haxe.ds.ReadOnlyArray;
 import sys.io.File;
 
 /**
@@ -62,7 +63,7 @@ import sys.io.File;
 ')
 @:headerInclude('./wgpu.h')
 class Device {
-	public function createBufferWithFloat32Data(data:Array<Float>, usage:BufferUsage):Buffer {
+	public function createBufferWithFloat32Data(data:ReadOnlyArray<Float>, usage:BufferUsage):Buffer {
 		untyped __cpp__('
 			float *native_data = (float*)malloc(sizeof(*native_data) * data->length);
 
@@ -81,7 +82,7 @@ class Device {
 	}
 
 	// TODO UInt32 version
-	public function createBufferWithUInt16Data(data:Array<Int>, usage:BufferUsage):Buffer {
+	public function createBufferWithUInt16Data(data:ReadOnlyArray<Int>, usage:BufferUsage):Buffer {
 		untyped __cpp__('
 			uint16_t *native_data = (uint16_t*)malloc(sizeof(*native_data) * data->length);
 
@@ -262,7 +263,7 @@ class Device {
 		throw "unreachable";
 	}
 
-	public function createShaderModule(data:Array<UInt>):ShaderModule {
+	public function createShaderModule(data:ReadOnlyArray<Int>):ShaderModule {
 		untyped __cpp__('
 			uint32_t *native_data = (uint32_t*)malloc(sizeof(*native_data) * data->length);
 
@@ -289,7 +290,7 @@ class Device {
 
 	public function createShaderModuleFromFile(path:String):ShaderModule {
 		final rawData = File.getBytes(path);
-		final data = new Array<UInt>();
+		final data = new Array<Int>();
 
 		for (i in 0...Std.int(rawData.length / 4)) {
 			data.push(rawData.getInt32(i * 4));

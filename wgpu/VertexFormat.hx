@@ -1,6 +1,6 @@
 package wgpu;
 
-enum abstract VertexFormat(UInt) {
+enum abstract VertexFormat(Int) {
 	var Uchar2 = 0;
 	var Uchar4 = 1;
 	var Char2 = 2;

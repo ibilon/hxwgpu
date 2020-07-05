@@ -1,6 +1,6 @@
 package wgpu;
 
-enum abstract BlendOperation(UInt) {
+enum abstract BlendOperation(Int) {
 	var Add = 0;
 	var Subtract = 1;
 	var ReverseSubtract = 2;

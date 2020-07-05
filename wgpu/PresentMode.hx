@@ -1,6 +1,6 @@
 package wgpu;
 
-enum abstract PresentMode(UInt) {
+enum abstract PresentMode(Int) {
 	/**
 		The presentation engine does **not** wait for a vertical blanking period and the request is presented immediately.
 		This is a low-latency presentation mode, but visible tearing may be observed.

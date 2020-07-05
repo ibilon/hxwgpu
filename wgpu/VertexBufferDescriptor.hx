@@ -6,7 +6,7 @@ package wgpu;
 @:structInit
 class VertexBufferDescriptor {
 	/** The stride, in bytes, between elements of this buffer. **/
-	public var stride:UInt;
+	public var stride:Int;
 
 	public var stepMode:InputStepMode;
 

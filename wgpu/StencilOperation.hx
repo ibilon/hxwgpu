@@ -1,6 +1,6 @@
 package wgpu;
 
-enum abstract StencilOperation(UInt) {
+enum abstract StencilOperation(Int) {
 	var Keep = 0;
 	var Zero = 1;
 	var Replace = 2;

@@ -1,6 +1,6 @@
 package wgpu;
 
-enum abstract BufferUsage(UInt) {
+enum abstract BufferUsage(Int) {
 	var MapRead = 1;
 	var MapWrite = 2;
 	var CopySrc = 4;

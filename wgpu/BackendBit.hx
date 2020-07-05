@@ -1,6 +1,6 @@
 package wgpu;
 
-enum abstract BackendBit(UInt) {
+enum abstract BackendBit(Int) {
 	var Vulkan = 2;
 	var Metal = 4;
 	var DX12 = 8;

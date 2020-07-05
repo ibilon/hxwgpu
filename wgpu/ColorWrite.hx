@@ -1,6 +1,6 @@
 package wgpu;
 
-enum abstract ColorWrite(UInt) {
+enum abstract ColorWrite(Int) {
 	var Red = 1;
 	var Green = 2;
 	var Blue = 4;

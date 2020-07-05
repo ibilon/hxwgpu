@@ -1,6 +1,6 @@
 package wgpu;
 
-enum abstract TextureUsage(UInt) {
+enum abstract TextureUsage(Int) {
 	var CopySrc = 1;
 	var CopyDst = 2;
 	var Sampled = 4;

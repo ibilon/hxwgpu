@@ -1,6 +1,6 @@
 package wgpu;
 
-enum abstract BlendFactor(UInt) {
+enum abstract BlendFactor(Int) {
 	var Zero = 0;
 	var One = 1;
 	var SrcColor = 2;

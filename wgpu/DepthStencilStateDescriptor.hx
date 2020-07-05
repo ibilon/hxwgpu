@@ -7,11 +7,11 @@ class DepthStencilStateDescriptor {
 	public var depthCompare:CompareFunction;
 	public var stencilFront:StencilStateFaceDescriptor;
 	public var stencilBack:StencilStateFaceDescriptor;
-	public var stencilReadMask:UInt;
-	public var stencilWriteMask:UInt;
+	public var stencilReadMask:Int;
+	public var stencilWriteMask:Int;
 
 	public function new(format:TextureFormat, depthWriteEnabled:Bool, depthCompare:CompareFunction, stencilFront:StencilStateFaceDescriptor,
-			stencilBack:StencilStateFaceDescriptor, stencilReadMask:UInt, stencilWriteMask:UInt) {
+			stencilBack:StencilStateFaceDescriptor, stencilReadMask:Int, stencilWriteMask:Int) {
 		this.format = format;
 		this.depthWriteEnabled = depthWriteEnabled;
 		this.depthCompare = depthCompare;

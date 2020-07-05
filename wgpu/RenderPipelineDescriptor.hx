@@ -30,10 +30,10 @@ class RenderPipelineDescriptor {
 	public var vertexState:VertexStateDescriptor;
 
 	/** The number of samples calculated per pixel (for MSAA). **/
-	public var sampleCount:UInt;
+	public var sampleCount:Int;
 
 	/** Bitmask that restricts the samples of a pixel modified by this pipeline. **/
-	public var sampleMask:UInt;
+	public var sampleMask:Int;
 
 	/**
 		When enabled, produces another sample mask per pixel based on the alpha output value, that is ANDed with the sample_mask and the primitive coverage to restrict the set of samples affected by a primitive. The implicit mask produced for alpha of zero is guaranteed to be zero, and for alpha of one is guaranteed to be all 1-s.

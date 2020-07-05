@@ -1,6 +1,6 @@
 package wgpu;
 
-enum abstract CompareFunction(UInt) {
+enum abstract CompareFunction(Int) {
 	var Undefined = 0;
 	var Never = 1;
 	var Less = 2;

@@ -2,7 +2,7 @@ package wgpu;
 
 @:structInit
 class VertexAttributeDescriptor {
-	public var offset:UInt;
+	public var offset:Int;
 	public var format:VertexFormat;
-	public var shaderLocation:UInt;
+	public var shaderLocation:Int;
 }
