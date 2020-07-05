@@ -36,6 +36,7 @@ jobs:
         cd hxwgpu-samples/libs/hxwgpu
         git pull https://github.com/ibilon/hxwgpu.git
         cd ../..
+        haxe cppia_host.hxml
         haxe build_all.hxml
 
     - name: Deploy documentation
