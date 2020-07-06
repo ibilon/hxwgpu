@@ -1,6 +1,6 @@
 package wgpu;
 
-// TODO missing functions: many
+// TODO missing functions: many + drop/destroy
 import haxe.ds.ReadOnlyArray;
 import sys.io.File;
 
@@ -75,13 +75,11 @@ class Device {
 			buffer->native = create_buffer_with_data((uint8_t*)native_data, data->length * 4, (WGPUBufferUsage)usage);
 
 			free(native_data);
-			return buffer;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('buffer');
 	}
 
-	// TODO UInt32 version
 	public function createBufferWithUInt16Data(data:ReadOnlyArray<Int>, usage:BufferUsage):Buffer {
 		untyped __cpp__('
 			uint16_t *native_data = (uint16_t*)malloc(sizeof(*native_data) * data->length);
@@ -94,10 +92,26 @@ class Device {
 			buffer->native = create_buffer_with_data((uint8_t*)native_data, data->length * 2, (WGPUBufferUsage)usage);
 
 			free(native_data);
-			return buffer;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('buffer');
+	}
+
+	public function createBufferWithUInt32Data(data:ReadOnlyArray<Int>, usage:BufferUsage):Buffer {
+		untyped __cpp__('
+			uint32_t *native_data = (uint32_t*)malloc(sizeof(*native_data) * data->length);
+
+			for (unsigned int i = 0; i < data->length; ++i) {
+				native_data[i] = (uint32_t)data->__get(i);
+			}
+
+			wgpu::Buffer buffer = wgpu::Buffer_obj::__alloc(HX_CTX);
+			buffer->native = create_buffer_with_data((uint8_t*)native_data, data->length * 4, (WGPUBufferUsage)usage);
+
+			free(native_data);
+		');
+
+		return untyped __cpp__('buffer');
 	}
 
 	public function createCommandEncoder(commandEncoderDescriptor:CommandEncoderDescriptor):CommandEncoder {
@@ -108,10 +122,9 @@ class Device {
 
 			wgpu::CommandEncoder commandEncoder = wgpu::CommandEncoder_obj::__alloc(HX_CTX);
 			commandEncoder->native = wgpu_device_create_command_encoder(native, &desc);
-			return commandEncoder;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('commandEncoder');
 	}
 
 	public function createPipelineLayout(pipelineLayoutDescriptor:PipelineLayoutDescriptor):PipelineLayout {
@@ -131,10 +144,9 @@ class Device {
 			pipelineLayout->native = wgpu_device_create_pipeline_layout(native, &desc);
 
 			free(bind_group_layouts);
-			return pipelineLayout;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('pipelineLayout');
 	}
 
 	public function createRenderPipeline(renderPipelineDescriptor:RenderPipelineDescriptor):RenderPipeline {
@@ -257,10 +269,9 @@ class Device {
 			free(attributes);
 			free(vertex_buffers);
 			free(color_states);
-			return renderPipeline;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('renderPipeline');
 	}
 
 	public function createShaderModule(data:ReadOnlyArray<Int>):ShaderModule {
@@ -278,14 +289,13 @@ class Device {
 				}
 			};
 
-			wgpu::ShaderModule shader_module = wgpu::ShaderModule_obj::__alloc(HX_CTX);
-			shader_module->native = wgpu_device_create_shader_module(native, &desc);
+			wgpu::ShaderModule shaderModule = wgpu::ShaderModule_obj::__alloc(HX_CTX);
+			shaderModule->native = wgpu_device_create_shader_module(native, &desc);
 
 			free(native_data);
-			return shader_module;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('shaderModule');
 	}
 
 	public function createShaderModuleFromFile(path:String):ShaderModule {
@@ -311,19 +321,17 @@ class Device {
 
 			wgpu::SwapChain swapChain = wgpu::SwapChain_obj::__alloc(HX_CTX);
 			swapChain->native = wgpu_device_create_swap_chain(native, surface->native, &desc);
-			return swapChain;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('swapChain');
 	}
 
 	public function getDefaultQueue():Queue {
 		untyped __cpp__('
 			wgpu::Queue queue = wgpu::Queue_obj::__alloc(HX_CTX);
 			queue->native = wgpu_device_get_default_queue(native);
-			return queue;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('queue');
 	}
 }

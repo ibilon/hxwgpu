@@ -1,5 +1,7 @@
 package wgpu;
 
+// TODO static function enumerate and function getInfo aren't available in wgpu-native
+
 /**
 	A handle to a physical graphics and/or compute device.
 
@@ -48,6 +50,7 @@ class Adapter {
 	}
 
 	public function destroy():Void {
+		// TODO invalidate instance
 		untyped __cpp__('
 			wgpu_adapter_destroy(native);
 		');
@@ -69,9 +72,8 @@ class Adapter {
 
 			wgpu::Device device = wgpu::Device_obj::__alloc(HX_CTX);
 			device->native = wgpu_adapter_request_device(native, &desc, nullptr);
-			return device;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('device');
 	}
 }

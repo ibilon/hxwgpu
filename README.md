@@ -28,7 +28,7 @@ The library follows the API from [wgpu-rs](https://github.com/gfx-rs/wgpu-rs/) w
 * Functions and members use camelCase instead of snake_case
 * `Adapter::request` is replaced with `new Adapter`
 * `AdapterInfo` is not available
-* `device.createBufferWithData` is replaced with `device.createBufferWithFloat32Data` and `device.createBufferWithUInt16Data`
+* `device.createBufferWithData` is replaced with `device.createBufferWithFloat32Data`, `device.createBufferWithUInt16Data` and `device.createBufferWithUInt32Data`
 * `Surface::create` is replaced with `Surface.fromGLFW` supporting the [hxglfw](https://github.com/ibilon/hxglfw) library
 
 Samples are available at <https://github.com/ibilon/hxwgpu-samples/>.

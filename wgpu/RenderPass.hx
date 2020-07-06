@@ -33,6 +33,7 @@ class RenderPass {
 	}
 
 	public function endPass():Void {
+		// TODO does this invalidate the instance?
 		untyped __cpp__('
 			wgpu_render_pass_end_pass(native);
 		');

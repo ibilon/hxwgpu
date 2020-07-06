@@ -47,11 +47,9 @@ class Surface {
 				uint32_t window = (uint32_t)nativeHandle->__Field(HX_("linuxX11Window", d4, a8, 43, f8), hx::paccDynamic);
 				surface->native = wgpu_create_surface_from_xlib((const void**)display, window);
 			#endif
-
-			return surface;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('surface');
 	}
 	#end
 }

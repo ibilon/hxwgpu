@@ -10,6 +10,7 @@ package wgpu;
 class Texture {
 	// TODO missing functions
 	public function destroy():Void {
+		// TODO invalidate instance
 		untyped __cpp__('
 			wgpu_texture_destroy(native);
 		');

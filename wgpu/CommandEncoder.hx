@@ -76,22 +76,21 @@ class CommandEncoder {
 			renderPass->native = wgpu_command_encoder_begin_render_pass(native, &desc);
 
 			free(color_attachments);
-			return renderPass;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('renderPass');
 	}
 
 	/**
 		Finishes recording and returns a `CommandBuffer` that can be submitted for execution.
 	**/
 	public function finish():CommandBuffer {
+		// TODO does this invalidate the instance?
 		untyped __cpp__('
 			wgpu::CommandBuffer commandBuffer = wgpu::CommandBuffer_obj::__alloc(HX_CTX);
 			commandBuffer->native = wgpu_command_encoder_finish(native, nullptr);
-			return commandBuffer;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('commandBuffer');
 	}
 }

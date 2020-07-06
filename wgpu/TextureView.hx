@@ -11,6 +11,7 @@ package wgpu;
 @:headerInclude('./wgpu.h')
 class TextureView {
 	public function destroy():Void {
+		// TODO invalidate instance
 		untyped __cpp__('
 			wgpu_texture_view_destroy(native);
 		');

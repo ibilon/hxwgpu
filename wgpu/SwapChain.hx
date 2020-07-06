@@ -18,16 +18,16 @@ class SwapChain {
 		untyped __cpp__('
 			wgpu::SwapChainOutput swapChainOutput = wgpu::SwapChainOutput_obj::__alloc(HX_CTX);
 			swapChainOutput->native = wgpu_swap_chain_get_next_texture(native);
-			return swapChainOutput;
 		');
 
-		throw "unreachable";
+		return untyped __cpp__('swapChainOutput');
 	}
 
 	/**
 		Present the texture acquired from `getNextTexture` to the associated `Surface`.
 	**/
 	public function present():Void {
+		// TODO move to SwapChainOutput
 		untyped __cpp__('
 			wgpu_swap_chain_present(native);
 		');

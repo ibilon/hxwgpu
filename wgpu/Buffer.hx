@@ -11,6 +11,7 @@ package wgpu;
 @:headerInclude('./wgpu.h')
 class Buffer {
 	public function destroy():Void {
+		// TODO invalidate instance
 		untyped __cpp__('
 			wgpu_buffer_destroy(native);
 		');
