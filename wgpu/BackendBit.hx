@@ -16,4 +16,8 @@ enum abstract BackendBit(Int) {
 
 	/** Primary, Secondary */
 	var All = 126;
+
+	@:op(A & B) static function and(lhs:BackendBit, rhs:BackendBit):BackendBit;
+
+	@:op(A | B) static function or(lhs:BackendBit, rhs:BackendBit):BackendBit;
 }

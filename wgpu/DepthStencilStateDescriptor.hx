@@ -20,4 +20,8 @@ class DepthStencilStateDescriptor {
 		this.stencilReadMask = stencilReadMask;
 		this.stencilWriteMask = stencilWriteMask;
 	}
+
+	public function needsStencilReference():Bool {
+		return !stencilFront.compare.isTrivial() || !stencilBack.compare.isTrivial();
+	}
 }

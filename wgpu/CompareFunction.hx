@@ -10,4 +10,8 @@ enum abstract CompareFunction(Int) {
 	var NotEqual = 6;
 	var GreaterEqual = 7;
 	var Always = 8;
+
+	public function isTrivial():Bool {
+		return (cast this) == Never || (cast this) == Always;
+	}
 }

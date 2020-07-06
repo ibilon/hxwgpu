@@ -19,4 +19,8 @@ enum abstract TextureUsage(Int) {
 		there still need to be pipeline barriers inserted for synchronization.
 	**/
 	var Ordered = 31;
+
+	@:op(A & B) static function and(lhs:TextureUsage, rhs:TextureUsage):TextureUsage;
+
+	@:op(A | B) static function or(lhs:TextureUsage, rhs:TextureUsage):TextureUsage;
 }

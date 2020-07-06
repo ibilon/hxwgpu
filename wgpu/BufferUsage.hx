@@ -23,4 +23,8 @@ enum abstract BufferUsage(Int) {
 		there still need to be pipeline barriers inserted for synchronization.
 	**/
 	var Ordered = 511;
+
+	@:op(A & B) static function and(lhs:BufferUsage, rhs:BufferUsage):BufferUsage;
+
+	@:op(A | B) static function or(lhs:BufferUsage, rhs:BufferUsage):BufferUsage;
 }
