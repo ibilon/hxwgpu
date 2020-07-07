@@ -32,8 +32,12 @@ class CommandEncoder {
 		Begins recording of a render pass.
 
 		This function returns a `RenderPass` object which records a single render pass.
+
+		@throws UseAfterDestroyException If the `TextureView` in `renderPassDescriptor` were destroyed.
 	**/
 	public function beginRenderPass(renderPassDescriptor:RenderPassDescriptor):RenderPass {
+		renderPassDescriptor.validate();
+
 		untyped __cpp__('
 			WGPURenderPassColorAttachmentDescriptor *color_attachments = (WGPURenderPassColorAttachmentDescriptor*)malloc(sizeof(*color_attachments) * renderPassDescriptor->colorAttachments->length);
 

@@ -1,8 +1,10 @@
 package wgpu;
 
-// TODO missing functions: many + drop/destroy
 import haxe.ds.ReadOnlyArray;
 import sys.io.File;
+import wgpu.errors.UseAfterDestroyException;
+
+// TODO missing functions: many
 
 /**
 	An open connection to a graphics and/or compute device.
@@ -63,7 +65,14 @@ import sys.io.File;
 ')
 @:headerInclude('./wgpu.h')
 class Device {
+	var destroyed:Bool = false;
+
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
 	public function createBufferWithFloat32Data(data:ReadOnlyArray<Float>, usage:BufferUsage):Buffer {
+		validate();
+
 		untyped __cpp__('
 			float *native_data = (float*)malloc(sizeof(*native_data) * data->length);
 
@@ -80,7 +89,12 @@ class Device {
 		return untyped __cpp__('buffer');
 	}
 
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
 	public function createBufferWithUInt16Data(data:ReadOnlyArray<Int>, usage:BufferUsage):Buffer {
+		validate();
+
 		untyped __cpp__('
 			uint16_t *native_data = (uint16_t*)malloc(sizeof(*native_data) * data->length);
 
@@ -97,7 +111,12 @@ class Device {
 		return untyped __cpp__('buffer');
 	}
 
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
 	public function createBufferWithUInt32Data(data:ReadOnlyArray<Int>, usage:BufferUsage):Buffer {
+		validate();
+
 		untyped __cpp__('
 			uint32_t *native_data = (uint32_t*)malloc(sizeof(*native_data) * data->length);
 
@@ -114,7 +133,12 @@ class Device {
 		return untyped __cpp__('buffer');
 	}
 
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
 	public function createCommandEncoder(commandEncoderDescriptor:CommandEncoderDescriptor):CommandEncoder {
+		validate();
+
 		untyped __cpp__('
 			WGPUCommandEncoderDescriptor desc = {
 				label: hx::IsNull(commandEncoderDescriptor->label) ? nullptr : (const char*)commandEncoderDescriptor->label,
@@ -127,7 +151,12 @@ class Device {
 		return untyped __cpp__('commandEncoder');
 	}
 
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
 	public function createPipelineLayout(pipelineLayoutDescriptor:PipelineLayoutDescriptor):PipelineLayout {
+		validate();
+
 		untyped __cpp__('
 			WGPUBindGroupLayoutId *bind_group_layouts = (WGPUBindGroupLayoutId*)malloc(sizeof(*bind_group_layouts) * pipelineLayoutDescriptor->bindGroupLayouts->length);
 
@@ -149,7 +178,12 @@ class Device {
 		return untyped __cpp__('pipelineLayout');
 	}
 
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
 	public function createRenderPipeline(renderPipelineDescriptor:RenderPipelineDescriptor):RenderPipeline {
+		validate();
+
 		untyped __cpp__('
 			WGPUProgrammableStageDescriptor fragment_stage;
 
@@ -274,7 +308,12 @@ class Device {
 		return untyped __cpp__('renderPipeline');
 	}
 
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
 	public function createShaderModule(data:ReadOnlyArray<Int>):ShaderModule {
+		validate();
+
 		untyped __cpp__('
 			uint32_t *native_data = (uint32_t*)malloc(sizeof(*native_data) * data->length);
 
@@ -298,7 +337,12 @@ class Device {
 		return untyped __cpp__('shaderModule');
 	}
 
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
 	public function createShaderModuleFromFile(path:String):ShaderModule {
+		validate();
+
 		final rawData = File.getBytes(path);
 		final data = new Array<Int>();
 
@@ -309,7 +353,12 @@ class Device {
 		return createShaderModule(data);
 	}
 
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
 	public function createSwapChain(surface:Surface, swapChainDescriptor:SwapChainDescriptor):SwapChain {
+		validate();
+
 		untyped __cpp__('
 			WGPUSwapChainDescriptor desc = {
 				usage: (WGPUTextureUsage)swapChainDescriptor->usage,
@@ -326,12 +375,39 @@ class Device {
 		return untyped __cpp__('swapChain');
 	}
 
+	/**
+		Destroy the device.
+
+		Using the instance after this will throw a `UseAfterDestroyException` exception.
+
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
+	public function destroy():Void {
+		validate();
+		untyped __cpp__('wgpu_device_destroy(native)');
+		destroyed = true;
+	}
+
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
 	public function getDefaultQueue():Queue {
+		validate();
+
 		untyped __cpp__('
 			wgpu::Queue queue = wgpu::Queue_obj::__alloc(HX_CTX);
 			queue->native = wgpu_device_get_default_queue(native);
 		');
 
 		return untyped __cpp__('queue');
+	}
+
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
+	function validate():Void {
+		if (destroyed) {
+			throw new UseAfterDestroyException(this);
+		}
 	}
 }

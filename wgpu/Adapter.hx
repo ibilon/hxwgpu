@@ -1,5 +1,7 @@
 package wgpu;
 
+import wgpu.errors.UseAfterDestroyException;
+
 // TODO static function enumerate and function getInfo aren't available in wgpu-native
 
 /**
@@ -29,6 +31,8 @@ package wgpu;
 ')
 @:headerInclude('./wgpu.h')
 class Adapter {
+	var destroyed:Bool = false;
+
 	/**
 		Retrieves an `Adapter` which matches the given options.
 
@@ -49,17 +53,27 @@ class Adapter {
 
 	}
 
+	/**
+		Destroy the adapter.
+
+		Using the instance after this will throw a `UseAfterDestroyException` exception.
+
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
 	public function destroy():Void {
-		// TODO invalidate instance
-		untyped __cpp__('
-			wgpu_adapter_destroy(native);
-		');
+		validate();
+		untyped __cpp__('wgpu_adapter_destroy(native)');
+		destroyed = true;
 	}
 
 	/**
 		Requests a connection to a physical device, creating a logical device.
+
+		@throws UseAfterDestroyException If the instance was already destroyed.
 	**/
 	public function requestDevice(deviceDescriptor:DeviceDescriptor):Device {
+		validate();
+
 		untyped __cpp__('
 			WGPUDeviceDescriptor desc = {
 				extensions: {
@@ -75,5 +89,14 @@ class Adapter {
 		');
 
 		return untyped __cpp__('device');
+	}
+
+	/**
+		@throws UseAfterDestroyException If the instance was already destroyed.
+	**/
+	function validate():Void {
+		if (destroyed) {
+			throw new UseAfterDestroyException(this);
+		}
 	}
 }

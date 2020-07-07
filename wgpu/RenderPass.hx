@@ -16,9 +16,7 @@ class RenderPass {
 		The active vertex buffers can be set with `RenderPass.setVertexBuffers`.
 	**/
 	public function draw(verticesStart:Int, verticesEnd:Int, instancesStart:Int, instancesEnd:Int):Void {
-		untyped __cpp__('
-			wgpu_render_pass_draw(native, verticesEnd - verticesStart, instancesEnd - instancesStart, verticesStart, instancesStart);
-		');
+		untyped __cpp__('wgpu_render_pass_draw(native, verticesEnd - verticesStart, instancesEnd - instancesStart, verticesStart, instancesStart)');
 	}
 
 	/**
@@ -27,16 +25,12 @@ class RenderPass {
 		The active index buffer can be set with `RenderPass.setIndexBuffer`, while the active vertex buffers can be set with `RenderPass.setVertexBuffers`.
 	**/
 	public function drawIndexed(indicesStart:Int, indicesEnd:Int, baseVertex:Int, instancesStart:Int, instancesEnd:Int):Void {
-		untyped __cpp__('
-			wgpu_render_pass_draw_indexed(native, indicesEnd - indicesStart, instancesEnd - indicesStart, indicesStart, baseVertex, instancesStart);
-		');
+		untyped __cpp__('wgpu_render_pass_draw_indexed(native, indicesEnd - indicesStart, instancesEnd - indicesStart, indicesStart, baseVertex, instancesStart)');
 	}
 
 	public function endPass():Void {
 		// TODO does this invalidate the instance?
-		untyped __cpp__('
-			wgpu_render_pass_end_pass(native);
-		');
+		untyped __cpp__('wgpu_render_pass_end_pass(native)');
 	}
 
 	/**
@@ -45,11 +39,12 @@ class RenderPass {
 		Subsequent calls to `drawIndexed` on this `RenderPass` will use `buffer` as the source index buffer.
 
 		If `size` == 0, the remaining part of the buffer is considered.
+
+		@throws UseAfterDestroyException If `buffer` was destroyed.
 	**/
 	public function setIndexBuffer(buffer:Buffer, offset:Int, size:Int):Void {
-		untyped __cpp__('
-			wgpu_render_pass_set_index_buffer(native, buffer->native, offset, size);
-		');
+		buffer.validate();
+		untyped __cpp__('wgpu_render_pass_set_index_buffer(native, buffer->native, offset, size)');
 	}
 
 	/**
@@ -58,9 +53,7 @@ class RenderPass {
 		Subsequent draw calls will exhibit the behavior defined by `pipeline`.
 	**/
 	public function setPipeline(renderPipeline:RenderPipeline):Void {
-		untyped __cpp__('
-			wgpu_render_pass_set_pipeline(native, renderPipeline->native);
-		');
+		untyped __cpp__('wgpu_render_pass_set_pipeline(native, renderPipeline->native)');
 	}
 
 	/**
@@ -71,10 +64,11 @@ class RenderPass {
 		The `slot` refers to the index of the matching descriptor in `RenderPipelineDescriptor.vertex_buffers`.
 
 		If `size` == 0, the remaining part of the buffer is considered.
+
+		@throws UseAfterDestroyException If `buffer` was destroyed.
 	**/
 	public function setVertexBuffer(slot:Int, buffer:Buffer, offset:Int, size:Int):Void {
-		untyped __cpp__('
-			wgpu_render_pass_set_vertex_buffer(native, slot, buffer->native, offset, size);
-		');
+		buffer.validate();
+		untyped __cpp__('wgpu_render_pass_set_vertex_buffer(native, slot, buffer->native, offset, size)');
 	}
 }
