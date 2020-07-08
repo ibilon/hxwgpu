@@ -1,6 +1,6 @@
 package wgpu;
 
-import wgpu.errors.UseAfterDestroyException;
+import wgpu.errors.*;
 
 /**
 	A handle to a texture view.
@@ -14,6 +14,7 @@ import wgpu.errors.UseAfterDestroyException;
 @:headerInclude('./wgpu.h')
 class TextureView {
 	var destroyed:Bool = false;
+	var swapChainTexture:Bool = false;
 
 	/**
 		Destroy the texture view.
@@ -24,7 +25,12 @@ class TextureView {
 	**/
 	public function destroy():Void {
 		validate();
-		untyped __cpp__('wgpu_texture_view_destroy(native)'); // TODO Native exception leak: Can't destroy a swapchain image for swapChain.getNextTexture().view.destroy()
+
+		if (swapChainTexture) {
+			throw new CantDestroySwapChainTextureException(this);
+		}
+
+		untyped __cpp__('wgpu_texture_view_destroy(native)');
 		destroyed = true;
 	}
 

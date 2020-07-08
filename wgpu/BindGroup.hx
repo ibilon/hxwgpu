@@ -9,6 +9,7 @@ import wgpu.errors.UseAfterDestroyException;
 	It can be created with `Device.createBindGroup`.
 	A `BindGroup` can be bound to a particular `RenderPass` with `RenderPass.setBindGroup`, or to a `ComputePass` with `ComputePass.setBindGroup`.
 **/
+@:allow(wgpu)
 @:headerClassCode('
 	WGPUBindGroupId native;
 ')
@@ -30,6 +31,8 @@ class BindGroup {
 	}
 
 	/**
+		[Internal]
+
 		@throws UseAfterDestroyException If the instance was already destroyed.
 	**/
 	function validate():Void {

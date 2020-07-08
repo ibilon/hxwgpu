@@ -13,6 +13,8 @@ class RenderPassDescriptor {
 	@:optional public var depthStencilAttachment:Null<RenderPassDepthStencilAttachmentDescriptor>;
 
 	/**
+		[Internal]
+
 		@throws UseAfterDestroyException If `colorAttachments` or `depthStencilAttachment` isn't valid.
 	**/
 	function validate():Void {

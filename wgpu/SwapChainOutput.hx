@@ -14,6 +14,7 @@ class SwapChainOutput {
 		untyped __cpp__('
 			wgpu::TextureView textureView = wgpu::TextureView_obj::__alloc(HX_CTX);
 			textureView->native = native.view_id;
+			textureView->swapChainTexture = true;
 		');
 
 		return untyped __cpp__('textureView');

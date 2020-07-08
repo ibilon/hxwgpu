@@ -10,6 +10,8 @@ class RenderPassColorAttachmentDescriptor {
 	public var clearColor:Color;
 
 	/**
+		[Internal]
+
 		@throws UseAfterDestroyException If `attachment` or `resolveTarget` (when present) were already destroyed.
 	**/
 	function validate():Void {

@@ -403,6 +403,8 @@ class Device {
 	}
 
 	/**
+		[Internal]
+
 		@throws UseAfterDestroyException If the instance was already destroyed.
 	**/
 	function validate():Void {

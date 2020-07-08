@@ -14,7 +14,7 @@ class SwapChain {
 	/**
 		Returns the next texture to be presented by the swapchain for drawing.
 	**/
-	public function getNextTexture():Null<SwapChainOutput> {
+	public function getNextTexture():SwapChainOutput {
 		untyped __cpp__('
 			wgpu::SwapChainOutput swapChainOutput = wgpu::SwapChainOutput_obj::__alloc(HX_CTX);
 			swapChainOutput->native = wgpu_swap_chain_get_next_texture(native);
@@ -27,7 +27,6 @@ class SwapChain {
 		Present the texture acquired from `getNextTexture` to the associated `Surface`.
 	**/
 	public function present():Void {
-		// TODO move to SwapChainOutput
 		untyped __cpp__('
 			wgpu_swap_chain_present(native);
 		');

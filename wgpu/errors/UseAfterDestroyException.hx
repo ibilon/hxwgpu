@@ -8,6 +8,9 @@ class UseAfterDestroyException<T> extends Exception {
 	/** The instance used after being destroyed. **/
 	public var instance(default, null):T;
 
+	/**
+		[Internal]
+	**/
 	function new(instance:T) {
 		this.instance = instance;
 		super("Instance used after being destroyed");
