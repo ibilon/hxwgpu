@@ -5,6 +5,7 @@ import wgpu.errors.UseAfterDestroyException;
 /**
 	A handle to a texture on the GPU.
 **/
+@:allow(wgpu)
 @:headerClassCode('
 	WGPUTextureId native;
 ')

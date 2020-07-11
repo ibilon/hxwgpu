@@ -3,6 +3,7 @@ package wgpu;
 /**
 	A view of a buffer which can be used to copy to or from a texture.
 **/
+@:allow(wgpu)
 @:structInit
 class BufferCopyView {
 	/** The buffer to be copied to or from. **/
@@ -24,4 +25,13 @@ class BufferCopyView {
 		Must be zero for copies where copy_size.depth == 1
 	**/
 	public var rowsPerImage:Int;
+
+	/**
+		[Internal]
+
+		@throws UseAfterDestroyException If `buffer` was already destroyed.
+	**/
+	function validate():Void {
+		buffer.validate();
+	}
 }

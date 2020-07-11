@@ -1,7 +1,5 @@
 package wgpu;
 
-// TODO missing functions: beginComputePass, copyBufferToBuffer, copyBufferToTexture, copyTextureToBuffer, copyTextureToTexture
-
 /**
 	An object that encodes GPU operations.
 
@@ -13,11 +11,17 @@ package wgpu;
 	#ifndef INCLUDED_wgpu_Color
 	#include <wgpu/Color.h>
 	#endif
+	#ifndef INCLUDED_wgpu_Origin3D
+	#include <wgpu/Origin3D.h>
+	#endif
 	#ifndef INCLUDED_wgpu_RenderPassColorAttachmentDescriptor
 	#include <wgpu/RenderPassColorAttachmentDescriptor.h>
 	#endif
 	#ifndef INCLUDED_wgpu_RenderPassDepthStencilAttachmentDescriptor
 	#include <wgpu/RenderPassDepthStencilAttachmentDescriptor.h>
+	#endif
+	#ifndef INCLUDED_wgpu_Texture
+	#include <wgpu/Texture.h>
 	#endif
 	#ifndef INCLUDED_wgpu_TextureView
 	#include <wgpu/TextureView.h>
@@ -28,6 +32,20 @@ package wgpu;
 ')
 @:headerInclude('./wgpu.h')
 class CommandEncoder {
+	/**
+		Begins recording of a compute pass.
+
+		This function returns a `ComputePass` object which records a single compute pass.
+	**/
+	public function beginComputePass():ComputePass {
+		untyped __cpp__('
+			wgpu::ComputePass computePass = wgpu::ComputePass_obj::__alloc(HX_CTX);
+			computePass->native = wgpu_command_encoder_begin_compute_pass(native, nullptr);
+		');
+
+		return untyped __cpp__('computePass');
+	}
+
 	/**
 		Begins recording of a render pass.
 
@@ -83,6 +101,138 @@ class CommandEncoder {
 		');
 
 		return untyped __cpp__('renderPass');
+	}
+
+	/**
+		Copy data from one buffer to another.
+
+		@throws UseAfterDestroyException If either `source` or `destination` were already destroyed.
+	**/
+	public function copyBufferToBuffer(source:Buffer, sourceOffset:Int, destination:Buffer, destinationOffset:Int, copySize:Int):Void {
+		source.validate();
+		destination.validate();
+		untyped __cpp__('wgpu_command_encoder_copy_buffer_to_buffer(native, source->native, sourceOffset, destination->native, destinationOffset, copySize)');
+	}
+
+	/**
+		Copy data from a buffer to a texture.
+
+		@throws UseAfterDestroyException If either the `Buffer` from `source` or the `Texture` from `destination` were already destroyed.
+	**/
+	public function copyBufferToTexture(source:BufferCopyView, destination:TextureCopyView, copySize:Extent3D):Void {
+		source.validate();
+		destination.validate();
+
+		untyped __cpp__('
+			WGPUBufferCopyView native_source = {
+				buffer: source->buffer->native,
+				offset: (WGPUBufferAddress)source->offset,
+				bytes_per_row: (uint32_t)source->bytesPerRow,
+				rows_per_image: (uint32_t)source->rowsPerImage,
+			};
+
+			WGPUTextureCopyView native_destination = {
+				texture: destination->texture->native,
+				mip_level: (uint32_t)destination->mipLevel,
+				array_layer: (uint32_t)destination->arrayLayer,
+				origin: {
+					x: (uint32_t)destination->origin->x,
+					y: (uint32_t)destination->origin->y,
+					z: (uint32_t)destination->origin->z,
+				},
+			};
+
+			WGPUExtent3d native_copy_size = {
+				width: (uint32_t)copySize->width,
+				height: (uint32_t)copySize->height,
+				depth: (uint32_t)copySize->depth,
+			};
+
+			wgpu_command_encoder_copy_buffer_to_texture(native, &native_source, &native_destination, native_copy_size);
+		');
+
+	}
+
+	/**
+		Copy data from a texture to a buffer.
+
+		@throws UseAfterDestroyException If either the `Texture` from `source` or the `Buffer` from `destination` were already destroyed.
+	**/
+	public function copyTextureToBuffer(source:TextureCopyView, destination:BufferCopyView, copySize:Extent3D):Void {
+		source.validate();
+		destination.validate();
+
+		untyped __cpp__('
+			WGPUTextureCopyView native_source = {
+				texture: source->texture->native,
+				mip_level: (uint32_t)source->mipLevel,
+				array_layer: (uint32_t)source->arrayLayer,
+				origin: {
+					x: (uint32_t)source->origin->x,
+					y: (uint32_t)source->origin->y,
+					z: (uint32_t)source->origin->z,
+				},
+			};
+
+			WGPUBufferCopyView native_destination = {
+				buffer: destination->buffer->native,
+				offset: (WGPUBufferAddress)destination->offset,
+				bytes_per_row: (uint32_t)destination->bytesPerRow,
+				rows_per_image: (uint32_t)destination->rowsPerImage,
+			};
+
+			WGPUExtent3d native_copy_size = {
+				width: (uint32_t)copySize->width,
+				height: (uint32_t)copySize->height,
+				depth: (uint32_t)copySize->depth,
+			};
+
+			wgpu_command_encoder_copy_texture_to_buffer(native, &native_source, &native_destination, native_copy_size);
+		');
+
+	}
+
+	/**
+		Copy data from one texture to another.
+
+		@throws UseAfterDestroyException If the `Texture` from either `source` or `destination` were already destroyed.
+	**/
+	public function copyTextureToTexture(source:TextureCopyView, destination:TextureCopyView, copySize:Extent3D):Void {
+		source.validate();
+		destination.validate();
+
+		untyped __cpp__('
+			WGPUTextureCopyView native_source = {
+				texture: source->texture->native,
+				mip_level: (uint32_t)source->mipLevel,
+				array_layer: (uint32_t)source->arrayLayer,
+				origin: {
+					x: (uint32_t)source->origin->x,
+					y: (uint32_t)source->origin->y,
+					z: (uint32_t)source->origin->z,
+				},
+			};
+
+			WGPUTextureCopyView native_destination = {
+				texture: destination->texture->native,
+				mip_level: (uint32_t)destination->mipLevel,
+				array_layer: (uint32_t)destination->arrayLayer,
+				origin: {
+					x: (uint32_t)destination->origin->x,
+					y: (uint32_t)destination->origin->y,
+					z: (uint32_t)destination->origin->z,
+				},
+			};
+
+			WGPUExtent3d native_copy_size = {
+				width: (uint32_t)copySize->width,
+				height: (uint32_t)copySize->height,
+				depth: (uint32_t)copySize->depth,
+			};
+
+			wgpu_command_encoder_copy_texture_to_texture(native, &native_source, &native_destination, native_copy_size);
+		');
+
 	}
 
 	/**
